@@ -1,0 +1,37 @@
+{% load static %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/testimonials.css' %}" />
+{% endblock %} 
+<div class="container">
+     <h2 class="text-center fw-bold mb-5">
+       OUR COSTUMER LOVE
+    </h2>
+<div class="position-relative">
+  <div id="testimonialContainer" class="d-flex flex-nowrap gap-5">
+    {% for t in testimonials %}
+      <div class="card mx-2 p-4 text-center flex-shrink-0 testimonial-card" style="width: 420px; height:auto">
+        <img src="{% static t.image %}" class="rounded-circle  mb-3 testimonial-img">
+        <p class="fw-semibold fs-4 mb-0">{{ t.text }}</p>
+        <p class="fw-semibold fs-4 mb-0">{{ t.subtext }}</p>
+        <p class="fw-semibold fs-4">{{ t.author }}</p>
+      </div>
+    {% endfor %}
+  </div>
+  <button id="scrollRightBtn"
+          class="btn btn-light position-absolute top-50 end-0 translate-middle-y shadow ">
+     <i class="fa-solid fa-arrow-right-long arrow-right arrow-wide"></i>
+  </button>
+</div>
+<div class="mt-5 d-flex flex-column flex-sm-row align-items-center justify-content-center gap-3 gap-sm-4 text-center text-sm-start">
+  <p class="fs-4 fs-md-4 fs-lg-2 fw-bold mb-0">
+    Direct visits chat item available
+  </p>
+ <div class="d-flex flex-column align-items-center p-3 text-black">
+  <i class="fa-solid fa-arrow-right-long text-black fs-4 transition arrow-wide"></i>
+  <span class="fs-6 fw-medium transition">see menu</span>
+</div>
+</div>
+</div>
+{% block scripts %}
+<script src="{% static 'js/testimonials.js' %}"></script>
+{% endblock %}

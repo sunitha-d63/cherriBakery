@@ -1,0 +1,74 @@
+{% load static %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/footer.css' %}" />
+{% endblock %}
+<footer class="position-relative py-4 text-lg overflow-hidden">
+<div class="bg-footer"></div>
+<div class="bg-footer-overlay"></div>
+  <div class="container-fluid position-relative z-2 px-3 px-md-5">
+    <div class="row g-4">
+      <div class="col-12 col-md-3 text-center text-md-start">
+        <img src="{% static 'images/logo2.png' %}" alt="Cherii" class="img-fluid mb-3" style="max-width:150px;">
+      </div>
+      <div class="col-12 col-md-3 text-center text-md-start">
+        <h3 class="fw-bold fs-4 mb-3">Quick Links</h3>
+        <ul class="list-unstyled fw-semibold fs-5">
+          <li>Track Your Order</li>
+          <li>Privacy Policy</li>
+          <li>Refund & Cancellation Policy</li>
+          <li>Terms & Conditions</li>
+          <li><a href="{% url 'contact' %}" class="text-decoration-none d-block text-dark">Contact</a></li>
+        </ul>
+      </div>
+
+      <div class="col-12 col-md-3 text-center text-md-start">
+        <h3 class="fw-bold fs-4 mb-3">Shop</h3>
+        <ul class="list-unstyled fw-semibold fs-5">
+          <a href="{% url 'category_products' 'cookies-biscuits' %}" class="text-decoration-none hover-underline  text-dark">Cookies & Biscuits</a>
+          <li><a href="{% url 'category_products' 'muffins-fruits-cake' %}" class="text-decoration-none hover-underline  text-dark">Muesli</a></li>
+          <li>Granola Bars</li>
+          <li>Seed Mixes</li>
+          <li><a href="{% url 'category_products' 'gift-box' %}" class="text-decoration-none hover-underline text-dark">Gift Boxes</a></li>
+          <li><a href="{% url 'category_products' 'sevories' %}" class="text-decoration-none hover-underline text-dark">Super Savers</a></li>
+
+        </ul>
+      </div>
+
+      <div class="col-12 col-md-3 text-center text-md-start">
+        <h3 class="fw-bold fs-4 mb-3">Contact</h3>
+        <ul class="list-unstyled fw-semibold fs-5">
+          <li class="d-flex align-items-start mb-2">
+            <i class="fa-solid fa-location-dot me-2"></i>
+            <span>No.45, Anna Salai, T. Nagar, Chennai - 600 017</span>
+          </li>
+          <li class="d-flex align-items-center mb-2">
+            <i class="fa-regular fa-envelope me-2"></i>
+            <a href="mailto:info@cherii.com" class="text-decoration-none text-black">info@cherii.com</a>
+          </li>
+          <li class="d-flex align-items-center">
+            <i class="fa-solid fa-phone me-2"></i>
+            <a href="tel:+1234567890" class="text-decoration-none text-black">+123 456 7890</a>
+          </li>
+        </ul>
+
+        <div class="mt-3">
+          <h4 class="fw-bold fs-4 mb-2">Follow us</h4>
+          <div class="d-flex justify-content-center justify-content-md-start gap-2">
+            <a href="https://www.instagram.com/accounts/login/" target="_blank" rel="noopener noreferrer">
+              <img src="{% static 'images/insta.png' %}" alt="Instagram" class="rounded p-1" style="width:32px;">
+            </a>
+            <a href="https://www.linkedin.com/login" target="_blank" rel="noopener noreferrer">
+              <img src="{% static 'images/linkdIn.png' %}" alt="LinkedIn" class="rounded p-1" style="width:32px;">
+            </a>
+            <a href="https://www.facebook.com/login/" target="_blank" rel="noopener noreferrer">
+              <img src="{% static 'images/facebook.png' %}" alt="Facebook" class="rounded p-1" style="width:32px;">
+            </a>
+            <a href="https://accounts.google.com/ServiceLogin?service=youtube" target="_blank" rel="noopener noreferrer">
+              <img src="{% static 'images/youtube.png' %}" alt="YouTube" class="rounded p-1" style="width:32px;">
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>

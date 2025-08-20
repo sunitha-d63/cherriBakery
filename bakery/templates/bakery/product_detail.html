@@ -1,0 +1,181 @@
+{% extends 'bakery/layout/base.html' %} {% load static %} {% block css %}
+<link rel="stylesheet" href="{% static 'css/product_detail.css' %}" />
+{% endblock %} {% block content %}
+<div class="container my-5">
+ <div class="row">
+  <div class="col-md-6">
+    <form method="POST" action="{% url 'product_detail' category_slug=product.category.slug product_id=product.id %}" id="productForm">
+      {% csrf_token %}
+      
+      <img
+        src="{{ product.image.url }}"
+        class="img-fluid rounded"
+        alt="{{ product.title }}"
+        style="width: 450px; height: 400px; object-fit: cover"
+      />
+
+      <div class="pincode mb-4 mt-3">
+        <h5>ENTER YOUR PINCODE*</h5>
+        <div class="input-group" style="width: 450px">
+          <input 
+            type="text"
+            class="form-control pininput"
+            name="pincode"
+            id="pincodeInput"
+            required
+            maxlength="6"
+          />
+        </div>
+        <small class="text-danger d-none" id="pincodeError">
+          Please enter a valid 6-digit pincode.
+        </small>
+      </div>
+
+      <div class="trust-badges">
+        <div class="d-flex align-items-center gap-4 fs-6 fs-md-5 mb-3">
+          <div class="rounded-circle bg-orange-light d-flex align-items-center justify-content-center" style="width: 48px; height: 48px">
+            <img src="{% static 'images/pay.png' %}" alt="Secure Payment" style="width: 40px; height: 40px ">
+          </div>
+          <span class="fw-semibold fs-5 ">100% secure payment</span>
+        </div>
+
+        <div class="d-flex align-items-center gap-4 fs-6 fs-md-5 mb-3">
+          <div class="rounded-circle bg-orange-light d-flex align-items-center justify-content-center" style="width: 48px; height: 48px">
+            <img src="{% static 'images/24hour.png' %}" alt="Preparation Time" style="width: 40px; height: 40px">
+          </div>
+          <span class="fw-semibold fs-5 ">24 hour preparation time</span>
+        </div>
+
+        <div class="d-flex align-items-center gap-4 fs-6 fs-md-5 mb-3">
+          <div class="rounded-circle bg-orange-light  d-flex align-items-center justify-content-center" style="width: 48px; height: 48px">
+            <img src="{% static 'images/vege.png' %}" alt="Vegetarian" style="width: 40px; height: 40px">
+          </div>
+          <span class="fw-semibold fs-5 ">100% vegetarian</span>
+        </div>
+      </div>
+
+      <p class="text-black small">
+        ** Note that all orders will be dispatched after 24 hours **
+      </p>
+    </div>
+
+    <div class="col-md-6">
+      <p class="text-muted fw-semibold">cherri berry</p>
+      <h1 class="mb-3 title">{{ product.title|upper }}</h1>
+      <p class="fs-4 fw-bold">{{ product.description }}</p>
+
+      <div class="price-section bg-light p-3 rounded mb-4 border-0">
+        <h2 class="text-dark mb-1">₹ {{ product.base_price }}</h2>
+        <p class="text-black small mb-0">INCL. OF ALL TAXES</p>
+      </div>
+      <div class="weight-options mb-4">
+        <h5 class="mb-3">WEIGHT:</h5>
+        <div class="btn-group" role="group">
+          {% for weight in weight_options %}
+          <button
+            type="button"
+            class="btn weightbtn text-black border"
+            data-weight="{{ weight }}"
+          >
+            {{ weight }}
+          </button>
+          {% endfor %}
+        </div>
+        <input type="hidden" name="weight" id="selectedWeight" required />
+        <small class="text-danger d-none" id="weightError">
+          Please select a weight.
+        </small>
+      </div>
+
+     <div class="quantity mb-4">
+  <h5>QUANTITY:</h5>
+  <div class="input-group" style="width: 150px">
+    <button class="btn border" type="button" id="decrementQty">-</button>
+    <input
+      type="number"
+      class="form-control text-center border"
+      name="quantity"
+      id="quantityInput"
+      value="1"
+      min="1"
+      max="99"
+      required
+    />
+    <button class="btn border" type="button" id="incrementQty">+</button>
+  </div>
+</div>
+
+<div class="action-buttons mb-5">
+    <button type="submit" 
+            name="add_to_cart"
+            class="btn btn-outline-dark btn-lg d-block w-100 mb-3 rounded-1 fw-semibold py-2">
+        ADD TO CART
+    </button>
+
+    <button type="submit" 
+            class="btn btn-dark btn-lg d-block w-100 rounded-1 fw-semibold py-2">
+        BUY NOW
+    </button>
+</div>
+
+      <div class="product-info">
+        <div class="nutrition  textbox mb-4">
+          <h4 class="pb-2">Nutrition:</h4>
+          <p class="pt-2 fs-5">
+            {{ product.nutrition_info|default:"Nutrition information not available" }}
+          </p>
+        </div>
+
+        <div class="ingredients textbox mb-4">
+          <h4 class=" pb-2">Ingredients:</h4>
+          <p class="pt-2 fs-5">
+            {{ product.ingredients|default:"Ingredients not specified" }}
+          </p>
+        </div>
+
+        <div class="allergies textbox mb-4">
+          <h4 class=" pb-2">Allergies</h4>
+          <p class="pt-2 fs-5">
+            {{ product.allergy_info|default:"No allergy information available" }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+  <div class="row mt-5">
+    <h3 class="mb-4 text-center">YOU MAY ALSO LIKE</h3>
+    {% for product in related_products %}
+    <div class="col-md-4 mb-4">
+      <div class="card h-100">
+        <a
+          href="{% url 'product_detail' category_slug=product.category.slug product_id=product.id %}"
+        >
+          <img
+            src="{{ product.image.url }}"
+            class="card-img-top"
+            alt="{{ product.title }}"
+            style="
+              width: 350px;
+              height: 350px;
+              object-fit: cover;
+              cursor: pointer;
+            "
+          />
+        </a>
+        <div class="card-body text-center">
+          <h5 class="card-title fs-4 text-uppercase fw-bold">
+            {{ product.title }}
+          </h5>
+          <p class="card-text fs-5">FROM: ₹{{ product.base_price }} PER KG</p>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% block scripts %}
+<script src="{% static 'js/productdetail.js' %}"></script>
+{% endblock %} {% endblock %}

@@ -1,0 +1,37 @@
+h2 {
+  color: #ee7f2f;
+}
+.common-questions {
+  font-family: "League Spartan", sans-serif !important;
+}
+.equal-height {
+  display: flex;
+  align-items: stretch;
+}
+.equal-height > div {
+  display: flex;
+  flex-direction: column;
+}
+.faq-image {
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+  border-radius: 10px;
+}
+.qa-separator {
+    position: relative;
+    height: 20px;
+    margin: 15px 0;
+    text-align: center;
+}
+.qa-separator::after {
+    content: "····················································";
+    color: #b9b8b8;
+    letter-spacing: 3px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    overflow: hidden;
+    text-overflow: clip;
+}

@@ -1,0 +1,88 @@
+.title,h3
+{
+  color:#ee9251;
+}
+.pininput:focus {
+    outline: none;
+    border: 1px solid rgb(146, 142, 142);
+}
+.action-buttons > .btn {
+  background-color: #f4d03c !important; 
+  border-color: #f4d03c !important;
+  color: #000 !important;
+}
+.bg-orange-light {
+  background-color: #e57f35;
+}
+.weight-options .btn {
+  margin-right: 5px;
+  margin-bottom: 5px;
+}
+.quantity .input-group {
+  margin-top: 10px;
+}
+.weightbtn {
+  outline: rgb(173, 173, 173) !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+}
+.weightbtn:hover {
+  background-color: #ffff99 !important; 
+}
+.textbox 
+{
+    outline: rgb(173, 173, 173) !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+}
+.weightbtn.active {
+  background-color: #e9da83 !important;
+  color: black !important;
+  outline: none !important;
+  border: none !important;
+
+}
+.weightbtn {
+  transition: all 0.2s ease;
+  border: 1px solid #dee2e6 !important;
+}
+
+.weightbtn:hover {
+  background-color: #f8f9fa !important;
+}
+.input-group button {
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+}
+
+.input-group button:hover {
+  background-color: #e9ecef;
+}
+
+.is-invalid {
+  border-color: #dc3545 !important;
+}
+
+.text-danger {
+  font-size: 0.875rem;
+  color: #dc3545 !important;
+}
+.price-section {
+  border: 1px solid #dee2e6;
+}
+.product-info h4 {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+.btn-lg {
+  padding: 0.75rem 1.5rem;
+  font-size: 1.1rem;
+}
+@media (max-width: 768px) {
+  .img-fluid {
+    width: 100% !important;
+    height: auto !important;
+  }
+  
+  .pincode .input-group {
+    width: 100% !important;
+  }
+}

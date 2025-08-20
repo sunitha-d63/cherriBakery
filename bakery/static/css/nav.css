@@ -1,0 +1,18 @@
+nav{
+    background-color: #D99A6C;
+}
+#mobileMenu
+{
+    background-color: #D99A6C;
+}
+.loginbtn
+{
+    background-color: #f3c744;
+}
+.loginbtn:hover{
+    background-color: #F3E5AB;
+}
+input:focus
+{
+    outline: none !important;
+}

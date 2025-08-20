@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&display=swap');
+
+/* #D99A6C, #F3E5AB, #FFF8F0 */
+*
+{margin:0;
+padding:0;
+box-sizing: border-box;}
+body{
+    font-family: "League Spartan" !important;
+}
+.card {
+    border: none;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+.form-control:focus {
+    box-shadow: none;
+    border-color: #0d6efd;
+}

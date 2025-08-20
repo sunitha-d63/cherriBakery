@@ -1,0 +1,214 @@
+{% load static %} {% block css %}
+<link rel="stylesheet" href="{% static 'css/nav.css' %}" />
+{% endblock %}
+<nav
+  class="px-4 px-lg-8 py-3 d-flex align-items-center justify-content-between"
+  style="height: 112px; z-index: 50; position: relative"
+>
+  <img
+    src="{% static 'images/logo.png' %}"
+    alt="logo"
+    class="w-20 h-16 flex-shrink-0"
+    style="width: 150px; height: 94px"
+  />
+
+  <div
+    class="d-none d-xl-flex flex-column justify-content-between h-100 py-1 flex-grow-1 mx-7"
+  >
+    <div
+      class="d-flex align-items-center justify-content-center gap-4 fw-semibold fs-5"
+    >
+      <a
+        href="{% url 'home' %}"
+        class="text-decoration-none hover-underline mx-3 text-dark"
+        >HOME</a
+      >
+      <a
+        href="{% url 'about' %}"
+        class="text-decoration-none hover-underline mx-3 text-dark"
+        >ABOUT US</a
+      >
+      <a
+        href="{% url 'all_products' %}"
+        class="text-decoration-none hover-underline mx-3 text-dark"
+        >OUR PRODUCTS</a
+      >
+      <a
+        href="{% url 'blog' %}"
+        class="text-decoration-none hover-underline mx-3 text-dark"
+        >BLOG</a
+      >
+      <a
+        href="{% url 'contact' %}"
+        class="text-decoration-none hover-underline mx-3 text-dark"
+        >CONTACT US</a
+      >
+    </div>
+
+    <form method="get" action="{% url 'search_products' %}" 
+      class="d-flex align-items-center bg-light rounded-3 px-4 py-1 mt-3 shadow w-100 mx-auto"
+      style="max-width: 680px">
+
+  <i class="fas fa-search text-secondary me-5"></i>
+  <input
+    type="text"
+    name="q"
+    placeholder="SEARCH HERE"
+    class="bg-transparent border-0 outline-none w-100 fs-6 text-secondary fw-semibold text-uppercase"
+    required
+  />
+</form>
+
+  </div>
+
+  <div
+    class="d-none d-xl-flex flex-column justify-content-between h-100 py-1 align-items-center"
+  >
+    <div class="d-flex align-items-center gap-4 text-dark fs-5">
+        <a href="{% url 'wishlist' %}" class="text-decoration-none">
+          <i class="bi bi-heart text-dark fw-bold"></i>
+        </a>
+      </li>
+      <span class="text-decoration-none">
+  <i class="far fa-bell text-dark"></i>
+</span>
+
+      <a href="{% url 'cart_page' %}" class="text-decoration-none position-relative">
+        <i class="fas fa-shopping-bag text-dark"></i>
+      
+      </a>
+    </div>
+
+    <div class="d-flex">
+      {% if user.is_authenticated %}
+      <form action="{% url 'logout' %}" method="post">
+        {% csrf_token %}
+        <button
+          type="submit"
+          class="btn fw-semibold text-black me-2 loginbtn px-4 fs-5"
+        >
+          Logout
+        </button>
+      </form>
+      {% else %}
+      <a
+        href="{% url 'login' %}"
+        class="btn fw-semibold text-black me-2 loginbtn px-4 fs-5"
+        >LOGIN</a
+      >
+      {% endif %}
+    </div>
+  </div>
+
+  <button
+    class="btn d-xl-none fs-2 flex-shrink-0 border-0 bg-transparent"
+    data-bs-toggle="collapse"
+    data-bs-target="#mobileMenu"
+  >
+    <i class="fas fa-bars"></i>
+  </button>
+
+  <div
+    id="mobileMenu"
+    class="collapse d-xl-none position-absolute start-0 w-100 p-4 shadow-lg"
+    style="top: 112px; z-index: 1000"
+  >
+    <ul
+      class="d-flex flex-column gap-3 text-dark fw-semibold mb-4 list-unstyled"
+    >
+      <li>
+        <a
+          href="{% url 'home' %}"
+          class="text-decoration-none text-dark"
+          data-bs-toggle="collapse"
+          data-bs-target="#mobileMenu"
+          >HOME</a
+        >
+      </li>
+      <li>
+        <a
+          href="{% url 'about' %}"
+          class="text-decoration-none text-dark"
+          data-bs-toggle="collapse"
+          data-bs-target="#mobileMenu"
+          >ABOUT US</a
+        >
+      </li>
+      <li>
+        <a
+          href="{% url 'all_products' %}"
+          class="text-decoration-none text-dark"
+          data-bs-toggle="collapse"
+          data-bs-target="#mobileMenu"
+          >OUR PRODUCTS</a
+        >
+      </li>
+      <li>
+        <a
+          href="{% url 'blog' %}"
+          class="text-decoration-none text-dark"
+          data-bs-toggle="collapse"
+          data-bs-target="#mobileMenu"
+          >BLOG</a
+        >
+      </li>
+      <li>
+        <a
+          href="{% url 'contact' %}"
+          class="text-decoration-none text-dark"
+          data-bs-toggle="collapse"
+          data-bs-target="#mobileMenu"
+          >CONTACT US</a
+        >
+      </li>
+    </ul>
+
+    <div
+      class="d-flex align-items-center bg-light rounded-3 px-4 py-2 mb-4 shadow"
+    >
+      <i class="fas fa-search text-secondary me-3"></i>
+      <input
+        type="text"
+        placeholder="SEARCH HERE"
+        class="bg-transparent border-0 outline-none w-100 text-secondary fw-semibold text-uppercase"
+      />
+    </div>
+
+    <div class="d-flex align-items-center justify-content-between">
+      <div class="d-flex align-items-center gap-4">
+        <a href="{% url 'wishlist' %}" class="nav-link me-3">
+          <i class="bi bi-heart"></i>
+        </a>
+        <a
+          href="#"
+          class="text-decoration-none text-dark"
+          data-bs-toggle="collapse"
+          data-bs-target="#mobileMenu"
+        >
+          <i class="far fa-bell fs-5"></i>
+        </a>
+       <a
+  href="{% url 'cart_page' %}"
+  class="text-decoration-none text-dark position-relative"
+>
+  <i class="fas fa-shopping-bag fs-5"></i>
+</a>
+      </div>
+
+      <div class="d-flex">
+        {% if user.is_authenticated %}
+        <form action="{% url 'logout' %}" method="post">
+          {% csrf_token %}
+          <button type="submit" class="btn loginbtn text-black">
+            Logout
+          </button>
+        </form>
+        {% else %}
+        <a href="{% url 'login' %}" class="btn btn-outline-primary me-2"
+          >Login</a
+        >
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</nav>

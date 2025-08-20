@@ -1,0 +1,121 @@
+{% extends 'bakery/layout/base.html' %} {% load static %} {% block css %}
+<link rel="stylesheet" href="{% static 'css/payment.css' %}" />
+{% endblock %} {% block content %}
+<div class="container py-4">
+  <h2 class="card-title text-center mb-3 text-orange">YOUR CART</h2>
+  <div class="row g-4">
+    {% for item in cart_items %}
+    <div class="col-12">
+      <div class="card shadow-sm border-0">
+        <div class="row g-0">
+          <div class="col-md-4">
+            {% if item.product.image %}
+            <img
+              src="{{ item.product.image.url }}"
+              ...
+              alt="{{ item.product.title }}"
+              class="rounded-start"
+              style="width: 100%; height: 400px; object-fit: cover"
+            />
+            {% else %}
+            <span>No image</span>
+            {% endif %}
+          </div>
+          <div class="col-md-8">
+            <div class="card-body p-4">
+              <p class="text-muted fw-semibold">cherri berry</p>
+              <h2 class="h4 fw-bold title">{{ item.product.title|upper }}</h2>
+
+              {% if item.product.description %}
+              <p class="fs-4 fw-bold">{{ item.product.description }}</p>
+              {% endif %}
+
+              <div class="d-flex align-items-center mb-3">
+                <h4 class="text-black mb-0">
+                  ₹{{ item.price|floatformat:2 }}
+                </h4>
+              </div>
+
+              <div class="mb-3">
+                <h5 class="mb-3 fs-5 fw-bold">WEIGHT:</h5>
+                <p class="bg-light text-dark ms-3 fw-semibold p-2 rounded">
+                  {{ item.weight }}
+                </p>
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label fw-bold fs-6">QUANTITY:</label>
+                <div class="input-group" style="width: 150px">
+                  <button
+                    class="btn btn-outline-secondary decrement"
+                    data-item-id="{{ item.id }}"
+                  >
+                    -
+                  </button>
+                  <input
+                    type="number"
+                    class="form-control text-center quantity"
+                    value="{{ item.quantity }}"
+                    min="1"
+                    data-item-id="{{ item.id }}"
+                  />
+                  <button
+                    class="btn btn-outline-secondary increment"
+                    data-item-id="{{ item.id }}"
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
+
+              <a
+                href="{% url 'remove_from_cart' item.id %}"
+                class="btn btn-danger btn-sm"
+              >
+                Remove
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% empty %}
+    <div class="col-12">
+      <div class="alert  text-center">Your cart is empty</div>
+    </div>
+    {% endfor %}
+  </div>
+
+  {% if cart_items %}
+  <div class="d-flex justify-content-center mt-4">
+    <form
+      method="POST"
+      action="{% url 'payment_page' %}"
+      class="w-100"
+      style="max-width: 800px"
+    >
+      {% csrf_token %}
+      <input type="hidden" name="cart_data" value="{{ cart_data_json }}" />
+
+      <div class="text-center">
+        <button
+          type="submit"
+          class="btn btn-primary py-3 fs-5 w-100"
+          style="max-width: 300px"
+        >
+          PROCEED TO BUY
+        </button>
+      </div>
+    </form>
+  </div>
+  {% else %}
+  <div class="text-center mt-4">
+    <a href="{% url 'all_products' %}" class="btn btn-primary py-3 fs-5">
+      Continue Shopping
+    </a>
+  </div>
+  {% endif %}
+</div>
+{% endblock %} {% block scripts %}
+<script src="{% static 'js/cart.js' %}"></script>
+{% endblock %}

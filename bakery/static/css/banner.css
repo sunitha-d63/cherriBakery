@@ -1,0 +1,19 @@
+.transition-opacity {
+  transition: opacity 0.7s ease;
+}
+.duration-700 {
+  transition-duration: 700ms;
+}
+.object-fit-cover {
+  object-fit: cover;
+}
+
+
+.banner-title.second-banner {
+  color: yellow !important;
+}
+
+.banner-title.last-banner {
+  color: pink !important;
+}
+

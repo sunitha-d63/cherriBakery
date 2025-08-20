@@ -1,0 +1,400 @@
+{% extends 'bakery/layout/base.html' %} {% load static %} {% block css %}
+<link rel="stylesheet" href="{% static 'css/payment.css' %}" />
+{% endblock %} {% block content %}
+<div class="container py-4">
+  <h2 class="card-title text-center mb-3 text-orange">PRODUCT DETAILS</h2>
+  <div class="row g-4">
+    <div class="col-12">
+      <div class="card shadow-sm border-0">
+        <div class="row g-0">
+          <div class="col-md-6">
+            {% if product.image_url %}
+            <img
+              src="{{ product.image_url }}"
+              class="rounded-start"
+              style="width: 480px; height: 480px; object-fit: cover"
+              alt="{{ product.title }}"
+            />
+            {% else %}
+            <div
+              class="bg-light d-flex align-items-center justify-content-center"
+              style="height: 300px"
+            >
+              <span class="text-muted">No image available</span>
+            </div>
+            {% endif %}
+          </div>
+          <div class="col-md-6">
+            <div class="card-body p-4">
+              <p class="text-muted fw-semibold">cherri berry</p>
+              <h2 class="h4 fw-bold title">{{ product.title|upper }}</h2>
+
+              {% if product.description %}
+              <p class="fs-4 fw-bold">{{ product.description }}</p>
+              {% endif %}
+
+              <div class="d-flex align-items-center mb-3">
+                <h4 class="text-primary mb-0">
+                  ₹{{ product.base_price|floatformat:2 }}
+                </h4>
+              </div>
+              <div class="mb-3">
+                <h5 class="mb-3 fs-5 fw-bold">WEIGHT:</h5>
+                <p class="bg-light text-dark ms-3 fw-semibold">
+                  {{ product.weight }}
+                </p>
+              </div>
+              <div class="mb-3">
+                <label class="form-label fw-bold fs-6">QUANTITY:</label>
+                <div class="input-group" style="width: 150px">
+                  <span class="input-group-text">{{ product.quantity }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <form method="POST" action="{% url 'process_payment' %}" id="paymentForm">
+    {% csrf_token %}
+    <input type="hidden" name="product_id" value="{{ product.id }}" />
+    <input type="hidden" name="quantity" value="{{ product.quantity }}" />
+    <input type="hidden" name="base_price" value="{{ product.base_price }}" />
+    <input type="hidden" name="weight" value="{{ product.weight }}" />
+    <input type="hidden" name="subtotal" value="{{ prices.subtotal }}" />
+    <input type="hidden" name="discount" value="{{ prices.discount }}" />
+    <input
+      type="hidden"
+      name="delivery_fee"
+      value="{{ prices.delivery_fee }}"
+    />
+    <input type="hidden" name="gst" value="{{ prices.gst }}" />
+    <input type="hidden" name="total" value="{{ prices.total }}" />
+
+    <div class="col-12">
+      <div class="card shadow-sm border-0">
+        <h3 class="card-title mb-3 text-center text-orange">ADD ADDRESS</h3>
+        <div class="row g-0">
+          <div class="col-md-6">
+            <div class="card-body p-4">
+              <div class="mb-3">
+                <label class="form-label fs-5 fw-semibold">NAME*</label>
+                <input
+                  type="text"
+                  name="name"
+                  class="form-control {% if errors.name %}is-invalid{% endif %}"
+                  required
+                  pattern="[a-zA-Z\s'-]+"
+                  title="Only letters, spaces, apostrophes and hyphens allowed"
+                />
+                {% if errors.name %}
+                <div class="invalid-feedback">{{ errors.name }}</div>
+                {% endif %}
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label fs-5 fw-semibold"
+                  >DELIVERY LOCATION*</label
+                >
+                <input
+                  type="text"
+                  name="location"
+                  class="form-control {% if errors.location %}is-invalid{% endif %}"
+                  required
+                  pattern="[a-zA-Z0-9\s\.,\-/]+"
+                  title="Letters, numbers, spaces and basic punctuation only"
+                />
+                {% if errors.location %}
+                <div class="invalid-feedback">{{ errors.location }}</div>
+                {% endif %}
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label fs-5 fw-semibold">MOBILE*</label>
+                <input
+                  type="tel"
+                  name="mobile"
+                  class="form-control {% if errors.mobile %}is-invalid{% endif %}"
+                  required
+                />
+                {% if errors.mobile %}
+                <div class="invalid-feedback">{{ errors.mobile }}</div>
+                {% endif %}
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label fs-5 fw-semibold">NOTES*</label>
+                <input
+                  type="text"
+                  name="location"
+                  class="form-control {% if errors.location %}is-invalid{% endif %}"
+                  required
+                  pattern="[a-zA-Z0-9\s\.,\-/]+"
+                  title="Letters, numbers, spaces and basic punctuation only"
+                />
+                {% if errors.location %}
+                <div class="invalid-feedback">{{ errors.location }}</div>
+                {% endif %}
+              </div>
+              <div class="mb-3">
+                <label class="form-label fs-5 fw-semibold">ADDRESS*</label>
+                <textarea
+                  name="address"
+                  class="form-control {% if errors.address %}is-invalid{% endif %}"
+                  rows="4"
+                  required
+                  minlength="10"
+                  pattern="[a-zA-Z0-9\s\.,\-/#&]+"
+                  title="Must be at least 10 characters with only letters, numbers and basic punctuation"
+                ></textarea>
+                {% if errors.address %}
+                <div class="invalid-feedback">{{ errors.address }}</div>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 d-none d-md-block">
+            <div
+              class="h-100"
+              style="
+                background: url('/static/images/cake_pay.jpg') center/cover;
+                min-height: 400px;
+              "
+            ></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container my-5">
+      <div class="row justify-content-center">
+        <div class="col-lg-7">
+          <section class="p-4">
+            <h2 class="text-center text-lg text-orange font-bold mb-4">
+              PAYMENT OPTIONS
+            </h2>
+            <div class="border border-gray-500 rounded p-2">
+              <div
+                class="d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-3 mb-0 p-3 border-0 rounded"
+              >
+                <div class="d-flex align-items-center gap-3 flex-grow-1">
+                  <div
+                    class="rounded-circle bg-orange-light d-flex align-items-center justify-content-center"
+                    style="width: 56px; height: 56px"
+                  >
+                    <img
+                      src="{% static 'images/upi.png' %}"
+                      alt="UPI"
+                      class="img-fluid"
+                      style="width: 40px; height: 40px"
+                    />
+                  </div>
+                  <div class="flex-grow-1">
+                    <p class="fw-bold mb-1 fs-4">Pay UPI</p>
+                    <p class="text-black small mb-2 fs-5 fw-semibold">
+                      +UPI Id
+                    </p>
+                    <input
+                      type="text"
+                      name="upi_id"
+                      placeholder="Enter Id"
+                      class="form-control form-control upi-field {% if errors.upi %}is-invalid{% endif %}"
+                      style="max-width: 300px"
+                    />
+                    {% if errors.upi %}
+                    <div class="invalid-feedback">{{ errors.upi }}</div>
+                    {% endif %}
+                  </div>
+                </div>
+                <div class="d-flex align-items-center">
+                  <div class="form-check">
+                    <input
+                      type="radio"
+                      name="paymentOption"
+                      value="upi"
+                      class="form-check-input square-radio"
+                      id="upiOption"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div
+                class="d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-3 mb-0 p-3 border-0 rounded"
+              >
+                <div class="d-flex align-items-center gap-3 flex-grow-1">
+                  <div
+                    class="rounded-circle bg-orange-light d-flex align-items-center justify-content-center"
+                    style="width: 56px; height: 56px"
+                  >
+                    <img
+                      src="{% static 'images/wallet.png' %}"
+                      alt="Wallet"
+                      class="img-fluid"
+                      style="width: 40px; height: 40px"
+                    />
+                  </div>
+                  <div class="flex-grow-1">
+                    <p class="fw-bold mb-1 fs-4">Pay Wallet</p>
+                    <p class="text-black small mb-2 fs-5 fw-semibold">
+                      +Wallet Id
+                    </p>
+                    <input
+                      type="text"
+                      name="wallet_id"
+                      placeholder="Enter Id"
+                      class="form-control form-control wallet-field {% if errors.wallet %}is-invalid{% endif %}"
+                      style="max-width: 300px"
+                    />
+                    {% if errors.wallet %}
+                    <div class="invalid-feedback">{{ errors.wallet }}</div>
+                    {% endif %}
+                  </div>
+                </div>
+                <div class="d-flex align-items-center">
+                  <div class="form-check">
+                    <input
+                      type="radio"
+                      name="paymentOption"
+                      value="wallet"
+                      class="form-check-input square-radio"
+                      id="walletOption"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div
+                class="d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-3 p-3 border-0 rounded"
+              >
+                <div class="d-flex align-items-center gap-3 flex-grow-1">
+                  <div
+                    class="rounded-circle bg-orange-light d-flex align-items-center justify-content-center"
+                    style="width: 56px; height: 56px"
+                  >
+                    <img
+                      src="{% static 'images/vector.png' %}"
+                      alt="Credit Card"
+                      class="img-fluid"
+                      style="width: 40px; height: 40px"
+                    />
+                  </div>
+                  <div class="flex-grow-1">
+                    <p class="fw-bold mb-1 fs-4">Pay Credit Card</p>
+                    <p class="text-black small mb-2 fs-5 fw-semibold">
+                      +Credit Card Id
+                    </p>
+                    <input
+                      type="text"
+                      name="card_number"
+                      placeholder="Card Number"
+                      class="form-control form-control card-field {% if errors.card %}is-invalid{% endif %}"
+                      style="max-width: 300px"
+                    />
+                    {% if errors.card %}
+                    <div class="invalid-feedback">{{ errors.card }}</div>
+                    {% endif %}
+                    <div class="row mt-2">
+                      <div class="col-md-6">
+                        <input
+                          type="text"
+                          name="expiry"
+                          placeholder="MM/YY"
+                          class="form-control mt-2 {% if errors.expiry %}is-invalid{% endif %}"
+                        />
+                        {% if errors.expiry %}
+                        <div class="invalid-feedback">{{ errors.expiry }}</div>
+                        {% endif %}
+                      </div>
+                      <div class="col-md-6">
+                        <input
+                          type="text"
+                          name="cvv"
+                          placeholder="CVV"
+                          class="form-control mt-2 {% if errors.cvv %}is-invalid{% endif %}"
+                        />
+                        {% if errors.cvv %}
+                        <div class="invalid-feedback">{{ errors.cvv }}</div>
+                        {% endif %}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="d-flex align-items-center">
+                  <div class="form-check">
+                    <input
+                      type="radio"
+                      name="paymentOption"
+                      value="credit"
+                      class="form-check-input square-radio"
+                      id="creditOption"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            {% if errors.payment %}
+            <div class="alert alert-danger mt-3">{{ errors.payment }}</div>
+            {% endif %}
+          </section>
+        </div>
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <div class="card mb-4" style="max-width: 800px; width: 100%">
+        <div class="card-body text-center">
+          <hr class="mx-auto" style="width: 90%" />
+
+          <div class="table-responsive">
+            <table class="table table-borderless fs-4 fw-semibold">
+              <tbody>
+                <tr>
+                  <td class="text-start">QUANTITY</td>
+                  <td class="text-end">{{ product.quantity }} KG</td>
+                </tr>
+                <tr>
+                  <td class="text-start">TOTAL PRODUCT PRICE</td>
+                  <td class="text-end">₹{{ prices.subtotal|floatformat:2 }}</td>
+                </tr>
+                <tr>
+                  <td class="text-start">DISCOUNT (15%)</td>
+                  <td class="text-end">
+                    -₹{{ prices.discount|floatformat:2 }}
+                  </td>
+                </tr>
+                <tr>
+                  <td class="text-start">DELIVERY FEE</td>
+                  <td class="text-end">
+                    ₹{{ prices.delivery_fee|floatformat:2 }}
+                  </td>
+                </tr>
+                <tr>
+                  <td class="text-start">INCL.GST (5%)</td>
+                  <td class="text-end">₹{{ prices.gst|floatformat:2 }}</td>
+                </tr>
+                <tr class="border-top">
+                  <td class="text-start fw-bold pt-3">TOTAL PRICE AMOUNT</td>
+                  <td class="text-end fw-bold pt-3">
+                    ₹{{ prices.total|floatformat:2 }}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <button
+            type="submit"
+            class="btn btn-primary w-100 py-2 mt-3 fs-5"
+            style="max-width: 300px"
+          >
+            PAY & ORDER NOW
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+{% block scripts %}
+<script src="{% static 'js/payment.js' %}"></script>
+{% endblock %} {% endblock %}

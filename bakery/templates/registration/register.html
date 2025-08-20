@@ -1,0 +1,144 @@
+{% extends 'bakery/layout/base.html' %} {% load static %} {% block css %}
+<link rel="stylesheet" href="{% static 'css/loginreg.css' %}" />
+{% endblock %} {% block content %}
+<div class="container py-5">
+  <div class="tab-container">
+    <a href="{% url 'login' %}" id="loginTab" class="tab-button fs-4"
+      ><i class="bi bi-box-arrow-in-right me-2"></i>Login</a
+    >
+    <a
+      href="{% url 'register' %}"
+      id="registerTab"
+      class="tab-button active fs-4"
+      ><i class="bi bi-person me-2"></i> Register</a
+    >
+  </div>
+  <div class="row align-items-center g-4 auth-main-container">
+    <div class="col-12 col-lg-6 text-center">
+      <div class="auth-image-column">
+        <img
+          src="{% static 'images/logAndRegister.png' %}"
+          alt="Bakery Image"
+          class="img-fluid rounded auth-image"
+        />
+      </div>
+    </div>
+
+    <div class="col-12 col-lg-6">
+      <div class="auth-form-column">
+        <form method="post" class="auth-form" novalidate>
+          {% csrf_token %}
+          {% if form.non_field_errors %}
+          <div class="alert alert-danger mb-3">
+            {% for error in form.non_field_errors %}
+            <i class="bi bi-exclamation-circle me-2"></i>{{ error }} 
+            {% endfor %}
+          </div>
+          {% endif %}
+          <div class="form-group mb-3">
+            <label for="{{ form.email.id_for_label }}" class="input-label"
+              >E-MAIL</label
+            >
+            {{ form.email }} {% if form.email.errors %}
+            <div class="text-danger mt-1">
+              {% for error in form.email.errors %}
+              <small
+                ><i class="bi bi-exclamation-circle me-1"></i>{{ error }}</small
+              >
+              {% endfor %}
+            </div>
+            {% endif %} {% if form.email.help_text %}
+            <small class="form-text text-muted"
+              >{{ form.email.help_text }}</small
+            >
+            {% endif %}
+          </div>
+          <div class="form-group mb-3">
+            <label for="{{ form.password.id_for_label }}" class="input-label"
+              >PASSWORD</label
+            >
+            {{ form.password }} {% if form.password.errors %}
+            <div class="text-danger mt-1">
+              {% for error in form.password.errors %}
+              <small
+                ><i class="bi bi-exclamation-circle me-1"></i>{{ error }}</small
+              >
+              {% endfor %}
+            </div>
+            {% endif %} {% if form.password.help_text %}
+            <small class="form-text text-muted"
+              >{{ form.password.help_text }}</small
+            >
+            {% endif %}
+          </div>
+
+          <div class="form-row row">
+            <div class="form-group col-md-6 mb-3">
+              <label
+                for="{{ form.first_name.id_for_label }}"
+                class="input-label"
+                >FIRST NAME</label
+              >
+              {{ form.first_name }} {% if form.first_name.errors %}
+              <div class="text-danger mt-1">
+                {% for error in form.first_name.errors %}
+                <small
+                  ><i class="bi bi-exclamation-circle me-1"></i>{{ error
+                  }}</small
+                >
+                {% endfor %}
+              </div>
+              {% endif %} {% if form.first_name.help_text %}
+              <small class="form-text text-muted"
+                >{{ form.first_name.help_text }}</small
+              >
+              {% endif %}
+            </div>
+            <div class="form-group col-md-6 mb-3">
+              <label for="{{ form.last_name.id_for_label }}" class="input-label"
+                >LAST NAME</label
+              >
+              {{ form.last_name }} {% if form.last_name.errors %}
+              <div class="text-danger mt-1">
+                {% for error in form.last_name.errors %}
+                <small
+                  ><i class="bi bi-exclamation-circle me-1"></i>{{ error
+                  }}</small
+                >
+                {% endfor %}
+              </div>
+              {% endif %} {% if form.last_name.help_text %}
+              <small class="form-text text-muted"
+                >{{ form.last_name.help_text }}</small
+              >
+              {% endif %}
+            </div>
+          </div>
+
+          <div class="terms-check mb-4">
+            <input type="checkbox" id="agreeTerms" name="agreeTerms" required />
+            <label for="agreeTerms">
+              I Have Read And Agree To The
+              <span class="inlinetext">Terms</span> And
+              <span class="inlinetext">Privacy Policy</span>
+            </label>
+            {% if form.agreeTerms.errors %}
+            <div class="text-danger mt-1">
+              {% for error in form.agreeTerms.errors %}
+              <small
+                ><i class="bi bi-exclamation-circle me-1"></i>{{ error }}</small
+              >
+              {% endfor %}
+            </div>
+            {% endif %}
+          </div>
+          <button type="submit" class="auth-button w-100 py-2 fs-5">
+            Register
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,64 @@
+{% extends 'bakery/layout/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5">
+  <h4 class="text-center mb-4 fw-semibold" style=" color: #333">
+    THE ORDER WAS PROCESSED, FULFILLED AND WILL BE DELIVERED <br/>WITHIN ONE DAY
+  </h4>
+  <div class="row mb-4 align-items-start">
+    <div class="col-md-6 pe-4">
+      <h2 class="mb-3 fw-bold" style="font-size: 22px;  padding-bottom: 10px">
+        ORDER SUMMARY
+      </h2>
+      <p class="mb-2 px-2 fs-5 fw-semibold">PRODUCT ID: {{ order.items.first.product.id }}</p>
+      <p class="mb-2 px-2 fs-5 fw-semibold">ORDER DATE: {{ order_date|date:"d-m-Y h:i A" }}</p>
+      <p class="mb-2 px-2 fs-5 fw-semibold">EXPECTED DELIVERY DATE: {{ expected_delivery|date:"d-m-Y h:i A"}}</p>
+      <p class="mb-0 px-2 fs-5 fw-semibold">TRACKING ID: {{ tracking_id }}</p>
+    </div>
+    <div class="col-md-6 px-4">
+      <img
+        src="{{ order.items.first.product.image.url }}"
+        alt="{{ order.items.first.product.title }}"
+        class="img-fluid rounded"
+        style="max-height: 250px; width: auto; border: 1px solid #eee"
+      />
+    </div>
+  </div>
+
+  <div class="row align-items-start">
+    <div class="col-md-6 pe-4">
+      <h2 class="h5 mb-4 fw-bold">TRACK YOUR ORDER</h2>
+      <div class="pl-3 fs-6">
+        {% for step in timeline %}
+        <div class="d-flex align-items-start mb-2 position-relative gap-2 fw-semibold">
+          <div class="mr-3 position-relative" style="width: 24px">
+            {% if forloop.counter <= 2 %}
+            <div style="width: 20px; height: 20px; border: 1px solid #ED8F2F; border-radius: 50%; background-color: #ED8F2F;"></div>
+            {% else %}
+            <div style="width: 20px; height: 20px; border: 1px solid #ED8F2F; border-radius: 50%;"></div>
+            {% endif %}
+            {% if not forloop.last %}
+            <div style="width: 2px; height: 48px; background: #ddd; position: absolute; left: 50%; top: 20px; transform: translateX(-50%);"></div>
+            {% endif %}
+          </div>
+          <div>
+            <p class="font-weight-bold mb-1">{{ step.step }}</p>
+            <p class="text-muted small">{{ step.time|date:"d-m-Y h:i A" }}</p>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <img
+        src="{% static 'images/map.png' %}"
+        alt="map"
+        class="img-fluid rounded"
+        style="max-height: 350px; width: auto; border: 1px solid #eee"
+      />
+    </div>
+  </div>
+</div>
+{% endblock %}

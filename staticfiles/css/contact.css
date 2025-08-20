@@ -1,0 +1,19 @@
+.form-control.is-invalid {
+  border-color: #dc3545;
+  background-image: none;
+}
+.form-control.is-valid {
+  border-color: #28a745;
+}
+.invalid-feedback {
+  display: none;
+  color: #dc3545;
+}
+.was-validated .form-control:invalid ~ .invalid-feedback,
+.was-validated .form-control.is-invalid ~ .invalid-feedback {
+  display: block;
+}
+.title
+{
+    color:#D99A6C !important;
+}

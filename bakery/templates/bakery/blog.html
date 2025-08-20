@@ -1,0 +1,107 @@
+{% extends 'bakery/layout/base.html' %}
+{% load static %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/blog.css' %}" />
+{% endblock %}
+{% block content %}
+<div class="mt-5 mt-md-5 mt-lg-5 bg-light text-dark px-3 px-md-5 py-5">
+    <h1 class="text-center text-warning fs-2 fs-md-1 fw-bold mb-3">
+        Welcome to Our Bakery Blog
+    </h1>
+<div class="container-fluid">
+    <div class="row align-items-center g-4">
+        <div class="col-12 col-md-6 d-flex justify-content-center">
+            <img
+                src="{% static 'images/bread.png' %}"
+                alt="Fresh Bread"
+                class="rounded shadow img-fluid"
+                style="max-width: 100%; height: auto;"
+            />
+        </div>
+        <div class="col-12 col-md-6 p-3 p-md-5">
+            <h2 class="fs-3 fs-md-2 text-center text-md-start fw-semibold mb-4 mb-md-5">
+                Fresh Bakes, Sweet Stories & Artisan Inspiration
+            </h2>
+            <p class="fs-md-4 text-justify text-md-start fw-semibold" style="font-size :26px;">
+                At Cherii Bakery, our passion for baking goes beyond the oven—it's a
+                story we love to share. This blog is your go-to destination for
+                everything sweet, savory, and lovingly handmade. Whether you're a
+                fellow baker, a food lover, or just someone who enjoys the warmth of
+                freshly baked bread, our blog is filled with something just for you.
+            </p>
+        </div>
+    </div>
+</div>
+    <div class="d-flex flex-column flex-md-row gap-4 mt-4 align-items-stretch">
+        <div class="col-md-8">
+            <h2 class="text-warning fs-3 fs-md-3 fw-bold mb-4 mt-4">
+                What You'll Find Here:
+            </h2>
+
+            <div class="vstack gap-4">
+                <div>
+                    <h3 class="text-brown fw-semibold fs-4 fs-md-3 mb-2">
+                        Behind-the-Scenes Stories
+                    </h3>
+                    <p class="fs-4 fs-md-5 fw-semibold">
+                        Get a peek inside our kitchen, meet our talented bakers, and learn what goes into creating your favorite pastries, cakes, and loaves.
+                    </p>
+                </div>
+
+                <div>
+                    <h3 class="text-brown fs-4 fs-md-3 fw-semibold mb-2">
+                        Seasonal Specials & New Arrivals
+                    </h3>
+                    <p class="fs-4 fs-md-5 fw-semibold">
+                        Be the first to know about our latest menu additions, seasonal treats,
+                        and limited-edition goodies.
+                    </p>
+                </div>
+
+                <div>
+                    <h3 class="text-brown fs-4 fs-md-3 fw-semibold mb-2">
+                        Recipes & Baking Tips
+                    </h3>
+                    <p class="fs-4 fs-md-5 fw-semibold">
+                        Try your hand at some of our favorite recipes and get expert tips to
+                        help you bake like a pro at home.
+                    </p>
+                </div>
+
+                <div>
+                    <h3 class="text-brown fs-4 fs-md-3 fw-semibold mb-2">
+                        Customer Spotlights & Events
+                    </h3>
+                    <p class="fs-4 fs-md-5 fw-semibold">
+                        We love our community! Read about our amazing customers, featured
+                        events, and special moments shared in our bakery.
+                    </p>
+                </div>
+                <div>
+                    <h3 class="text-brown fs-4 fs-md-3 fw-semibold mb-2">
+                        Sustainability & Ingredients
+                    </h3>
+                    <p class="fs-4 fs-md-5 fw-semibold">
+                        Learn more about the ingredients we use, our sourcing practices, and
+                        how we're working to bake better—for you and the planet.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 d-flex align-items-stretch">
+            <img
+                src="{% static 'images/cake.png' %}"
+                alt="Blueberry Cake"
+                class="rounded img-fluid"
+                style="max-width: 100%; height: auto;"
+            />
+        </div>
+    </div>
+    <p class="mt-5 text-center text-brown fs-3 fs-md-5 fw-semibold mx-auto ">
+        Whether you're here for mouthwatering ideas or curious about what's next
+        in our oven, our blog is a delicious stop on your journey. Stay connected
+        with us, leave a comment, and don't forget to subscribe so you never miss
+        a crumb!
+    </p>
+</div>
+{% endblock %}

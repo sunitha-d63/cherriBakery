@@ -1,0 +1,97 @@
+{% extends 'bakery/layout/base.html' %}
+{% load static %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/about.css' %}" />
+{% endblock %}
+{% block content %}
+<div class="mt-5 text-dark">
+  <section class="container">
+    <h2 class="text-center text-warning fw-bold fs-3 mb-4">ABOUT US</h2>
+    <div class="row align-items-center g-4">
+      <div class="col-md-6">
+        <p class="text-center fs-4 fw-semibold mb-4">
+          Baking From the Heart Since 2012 <br>
+          At Cherii Bakery, every loaf, pastry, and cake tells a story. What
+          started as a small kitchen passion has blossomed into a community
+          favorite. We believe in using time-honored recipes, fresh local
+          ingredients, and a generous sprinkle of love in every bite.
+        </p>
+        <p class="text-center fs-4 fw-semibold mb-4">
+          Our mission is to bring joy through handcrafted baked goods made
+          daily with care and dedication. Whether it's your morning bread or a
+          special occasion cake, we treat each creation as if it's for family.
+        </p>
+        <p class="text-center fs-4 fw-semibold mb-4">
+          We're proud to serve our neighborhood, support local farmers, and
+          bake a little happiness into every day.
+        </p>
+      </div>
+      <div class="col-md-6 text-center">
+        <img src="{% static 'images/ab1.png' %}" alt="Bake it till you make it" class="img-fluid w-75">
+      </div>
+    </div>
+  </section>
+
+  <section class="container py-5">
+    <div class="row align-items-center g-4">
+      <div class="col-md-6 text-center">
+        <img src="{% static 'images/ab2.png' %}" alt="The secret ingredient is love" class="img-fluid w-75">
+      </div>
+      <div class="col-md-6">
+        <h2 class="text-warning fw-bold fs-3 mb-4 text-center text-md-start">OUR STORY</h2>
+        <p class="text-center text-md-start fs-4 fw-semibold">
+          Cherii Bakery began as a home kitchen dream and quickly became a beloved
+          neighborhood treasure. Founded on the values of equity, community, and
+          homemade charm, we bake everything fresh each day using family recipes
+          and locally sourced ingredients.
+        </p>
+      </div>
+    </div>
+  </section>
+<h2 class="text-center text-#ee7f2f fw-bold fs-2">WHAT WE BELIEVE IN</h2>
+<div class="row row-cols-2 row-cols-sm-3 row-cols-md-5 g-3 mt-4 mb-5 justify-content-center mx-0">
+  {% for card in cards %}
+  <div class="col d-flex justify-content-center px-2">
+    <div class="bg-white rounded-4 shadow border border-1 border-secondary d-flex align-items-center justify-content-center p-2 w-100">
+      <img src="{% static card %}" alt="Card {{ forloop.counter }}" class="img-fluid" style="max-width: 100%; height: auto;">
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+  <section class="py-4 bg-warning-subtle">
+    <h4 class="text-center text-warning fw-bold fs-3 mb-3">MEET THE BAKERY</h4>
+    <p class="text-center fs-4 fw-semibold container">
+      Our team is made up of passionate bakers who bring skill, creativity, and care
+      to every product. From our Head Baker to our pastry chefs, everyone shares a
+      commitment to quality and customer happiness.
+    </p>
+  </section>
+
+  <h2 class="text-warning text-center fw-bold fs-3 mt-5 mb-4">COME VISIT US</h2>
+  <section class="container py-5">
+    <div class="row align-items-center g-4">
+      <div class="col-md-6">
+        <p class="text-center fs-4 fw-semibold mb-4">
+          We’re serving smiles across Tamil Nadu with many franchise locations!
+        </p>
+        <p class="text-center fs-4 fw-semibold mb-4">
+          Drop by your nearest branch and enjoy our fresh, handcrafted treats.
+        </p>
+        <div>
+          <h3 class="text-warning fw-bold fs-3 text-center text-md-start mb-2">Head office:</h3>
+          <address class="fw-semibold text-center text-md-start fs-4">
+            Cherii bakery, <br>
+            No.45, Anna Salai, T. Nagar, <br>
+            Chennai - 600 017, <br>
+            Tamil Nadu, India
+          </address>
+        </div>
+      </div>
+      <div class="col-md-6 text-center">
+        <img src="{% static 'images/ab3.png' %}" alt="Sugar butter vanilla cocoa flour" class="img-fluid w-75">
+      </div>
+    </div>
+  </section>
+</div>
+{% endblock %}

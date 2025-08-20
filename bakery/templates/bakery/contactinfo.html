@@ -1,0 +1,29 @@
+{% load static %}
+{% block content %}
+<section class="container px-4 px-sm-5 px-md-5 px-lg-5 py-5 py-md-5">
+    <h2 class="text-center fw-bold mb-4 mb-md-5" style="color: #f1e35fe7;">
+        OUR BRANCHES ACROSS TAMIL NADU
+    </h2>
+    <div class="row">
+        <div class="d-none d-lg-flex col-lg-6 justify-content-center">
+            <div class="position-relative w-100" style="max-width: 640px;">
+                <div class="position-relative" style="height: 820px;">
+                    <img src="{% static 'images/con1.png' %}" alt="Branch" class="position-absolute rounded shadow-lg" style="width: 85%; top: 0%; left: 0%; transform: rotate(-3deg);">
+                    <img src="{% static 'images/con2.png' %}" alt="Branch" class="position-absolute rounded shadow-lg z-3" style="width: 35%; top: 49%; left: -3%; transform: rotate(9deg);">
+                    <img src="{% static 'images/con3.png' %}" alt="Branch" class="position-absolute rounded shadow-lg" style="width: 85%; top: 65%; left: 1%; transform: rotate(4deg);">
+                    <img src="{% static 'images/con4.png' %}" alt="Branch" class="position-absolute rounded shadow-lg z-3" style="width: 35%; top: 115%; left: 55%; transform: rotate(-20deg);">
+                    <img src="{% static 'images/con5.png' %}" alt="Branch" class="position-absolute rounded shadow-lg" style="width: 85%; top: 130%; left: 6%; transform: rotate(-9deg);">
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-lg-6 fw-semibold">
+            {% for location in locations %}
+            <p class="mb-4">
+                <span class="font-weight-bold" style="font-size: 1.5rem;">{{ location.city }}</span><br>
+                <span class="font-weight-bold" style="font-size: 1.5rem;">{{ location.addr }}</span>
+            </p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

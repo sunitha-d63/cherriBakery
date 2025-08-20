@@ -1,0 +1,60 @@
+{% load static %} {% block css %}
+<link rel="stylesheet" href="{% static 'css/banner.css' %}" />
+{% endblock %} {% block content %}
+<div class="position-relative w-100" style="height: 80vh; overflow: hidden">
+  {% for banner in banners %}
+  <div
+    class="position-absolute w-100 h-100 transition-opacity duration-700 {% if forloop.first %}opacity-100{% else %}opacity-0{% endif %}"
+    data-slide
+  >
+    <img
+      src="{% static banner.bannerImg %}"
+      alt="{{ banner.title }}"
+      class="w-100 h-100 object-fit-cover"
+    />
+
+    <div
+      class="position-absolute top-0 start-2-rem"
+      style="max-width: 100%; height: 80%"
+    >
+      <img
+        src="{% static banner.arrowImg %}"
+        alt="arrow shape"
+        class="w-100 h-100"
+        style="filter: brightness(1.1); opacity: 0.8; object-fit: contain"
+      />
+      <div
+        class="position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center align-items-center text-center px-2 py-4"
+      >
+        <p
+          class="fw-bold fs-2 banner-title {% if forloop.counter == 2 %} second-banner {% elif forloop.last %} last-banner {% endif %}"
+          style="font-size: clamp(1.25rem, 2.5vw, 2rem)"
+        >
+          {{ banner.title }}
+        </p>
+
+        <p
+          class="fw-semibold fs-4 mt-2 mb-2 {{ banner.textClass }}"
+          style="font-size: clamp(1rem, 2vw, 1.25rem)"
+        >
+          {{ banner.subtitle }}
+        </p>
+
+        <a
+          href="{% url 'all_products' %}"
+          class="btn explore-btn fw-semibold rounded-pill px-3 py-1"
+          style="
+            background-color: #f4d03c;
+            font-size: clamp(1rem, 2vw, 1.25rem);
+          "
+        >
+          EXPLORE NOW
+        </a>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %} {% block scripts %}
+<script src="{% static 'js/banner.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends 'bakery/layout/base.html' %}
+{% load static %}
+{% block title %}Home - Bakery Products{% endblock %}
+{% block content %}
+{%include 'bakery/banner.html'%}
+{%include 'bakery/whychooseme.html'%}
+ <h2 class="text-center fs-2 fw-bold text-#ee7f2f; mb-4">
+  OFFERS & DEALS
+  </h2>
+<div class="w-100">
+  <img src="{% static 'images/Frame 6.png' %}" alt="Banner" class="img-fluid w-100">
+</div>
+{%include 'bakery/CommonQuestions.html'%}
+{%include 'bakery/customer_testimonials.html'%}
+{% endblock %}

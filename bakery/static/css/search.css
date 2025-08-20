@@ -1,0 +1,7 @@
+.fixed-img {
+  height: 200px;          /* fixed height for all product images */
+  object-fit: cover;      /* crop image to fit without distortion */
+  width: 100%;            /* make it span full card width */
+  border-top-left-radius: 0.5rem;  /* keep bootstrap card styling */
+  border-top-right-radius: 0.5rem;
+}

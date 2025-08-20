@@ -1,0 +1,72 @@
+{% load static %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/commonquestion.css' %}" />
+{% endblock %}
+<section class="py-5 px-3 common-questions">
+  <div class="container-fluid">
+    <h2 class="text-center fw-bold mb-5">
+      COMMON QUESTION FOR CUSTOMERS
+    </h2>
+   <div class="row g-2 align-items-stretch equal-height">
+       <div class="col-md-8 d-flex flex-column">
+        <div class="mb-1">
+          <h3 class="fw-bold fs-3">
+            1. What kind of content do you post on your blog?
+          </h3>
+          <p class="fw-semibold fs-4">
+            We share a variety of content including baking tips, behind-the-scenes stories from our bakery,
+            seasonal updates, recipes, product highlights, and community events.
+          </p>
+         <div class="qa-separator"></div>
+        </div>
+
+        <div class="mb-1">
+          <h3 class="fw-bold fs-3">
+            2. How often do you update the blog?
+          </h3>
+          <p class="fw-semibold fs-4">
+            We aim to post new content at least once or twice a month. Check back regularly or subscribe to our newsletter for updates!
+          </p>
+         <div class="qa-separator"></div>
+        </div>
+
+        <div class="mb-1">
+          <h3 class="fw-bold fs-3">
+            3. Can I request a blog topic or recipe?
+          </h3>
+          <p class="fw-semibold fs-4">
+            Absolutely! We love hearing from our readers. If there’s a recipe or topic you’d like us to cover,
+            feel free to contact us or leave a comment on a blog post.
+          </p>
+          <div class="qa-separator"></div>
+        </div>
+
+        <div class="mb-1">
+          <h3 class="fw-bold fs-3">
+            4. Are the recipes you share easy to follow for beginners?
+          </h3>
+          <p class="fw-semibold fs-4">
+            Yes! We include clear instructions, tips, and sometimes even step-by-step photos to help bakers of all levels enjoy the process.
+          </p>
+          <div class="qa-separator"></div>
+        </div>
+
+        <div class="mb-1">
+          <h3 class="fw-bold fs-3">
+            5. Do you feature guest posts or collaborations?
+          </h3>
+          <p class="fw-semibold fs-4">
+            We're open to collaborating with local chefs, food bloggers, and other creatives.
+          </p>
+        <div class="qa-separator"></div>
+        </div>
+      </div>
+      <div class="col-md-4 d-flex justify-content-center">
+        <img src="{% static 'images/faq.jpg' %}" alt="Macarons" class="img-fluid rounded">
+      </div>
+    </div>
+    <div class="d-flex justify-content-center my-3">
+      <img src="{% static 'images/faq1.png' %}" alt="divider" class="img-fluid w-75">
+    </div>
+  </div>
+</section>
